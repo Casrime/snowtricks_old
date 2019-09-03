@@ -26,6 +26,11 @@ class Image
      */
     private $alt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Trick", inversedBy="images")
+     */
+    private $trick;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class Image
     public function setAlt(string $alt): self
     {
         $this->alt = $alt;
+
+        return $this;
+    }
+
+    public function getTrick(): ?Trick
+    {
+        return $this->trick;
+    }
+
+    public function setTrick(?Trick $trick): self
+    {
+        $this->trick = $trick;
 
         return $this;
     }
