@@ -34,7 +34,7 @@ class Trick
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick")
+     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="trick", cascade={"persist"})
      */
     private $images;
 

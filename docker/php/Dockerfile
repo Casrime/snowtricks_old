@@ -19,12 +19,15 @@ RUN     apk add --update --no-cache \
         zlib-dev \
         libzip-dev \
         ca-certificates \
+        php-intl \
         && apk add --no-cache --virtual .build-deps \
             $PHPIZE_DEPS \
             curl \
             icu-dev \
+        && docker-php-ext-configure intl \
         && docker-php-ext-install \
             zip \
+            intl \
             pdo_mysql \
         && yes | pecl install xdebug \
         && apk add --no-cache su-exec \
