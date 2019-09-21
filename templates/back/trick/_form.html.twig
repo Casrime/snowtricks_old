@@ -2,8 +2,8 @@
     {{ form_row(form.name, {label: 'Nom'}) }}
     {{ form_row(form.description, {label: 'Description'}) }}
     {{ form_row(form.category, {label: 'Catégorie'}) }}
-    <ul class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
-    </ul>
+    {{ form_row(form.images, {
+        'data-prototype': "{{ form_widget(form.images.vars.prototype)|e('html_attr') }}"
+    }) }}
     <input type="submit" value="Valider">
-    {% do form.images.setRendered() %}
 {{ form_end(form) }}

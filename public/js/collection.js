@@ -4,7 +4,7 @@ var $newLinkLi = $('<li></li>').append($addImageLink);
 
 jQuery(document).ready(function() {
     // Get the ul that holds the collection of images
-    var $collectionHolder = $('ul.images');
+    var $collectionHolder = $('#trick_images');
 
     // add the "add a image" anchor and li to the images ul
     $collectionHolder.append($newLinkLi);
