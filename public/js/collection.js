@@ -36,8 +36,7 @@ function addImageForm($collectionHolder, $newLinkLi) {
 
     // Replace '$$name$$' in the prototype's HTML to
     // instead be a number based on how many items we have
-    var label = prototype.replace(/label__/g,'');
-    var newForm = label.replace(/__name__/g, 'Image ' + index);
+    var newForm = prototype.replace(/__name__/g, index);
 
     // increase the index with one for the next item
     $collectionHolder.data('index', index + 1);

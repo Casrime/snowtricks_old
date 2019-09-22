@@ -2,8 +2,31 @@
     {{ form_row(form.name, {label: 'Nom'}) }}
     {{ form_row(form.description, {label: 'Description'}) }}
     {{ form_row(form.category, {label: 'Catégorie'}) }}
-    {{ form_row(form.images, {
-        'data-prototype': "{{ form_widget(form.images.vars.prototype)|e('html_attr') }}"
-    }) }}
+    {% if edit is defined %}
+        {% for image in trick.images %}
+            <img src="{{ asset('uploads/'~image.name) }}" alt="{{ image.alt }}" />
+        {% endfor %}
+    {% endif %}
+    <div
+        id="trick_images"
+        data-prototype="
+            <fieldset class=&quot;form-group&quot;>
+                <legend class=&quot;col-form-label required&quot;>Image __name__</legend>
+                <div id=&quot;trick_images___name__&quot;>
+                    <div class=&quot;form-group&quot;>
+                        <label for=&quot;trick_images___name___alt&quot; class=&quot;required&quot;>Attribut alt</label>
+                        <input type=&quot;text&quot; id=&quot;trick_images___name___alt&quot; name=&quot;trick[images][__name__][alt]&quot; required=&quot;required&quot; class=&quot;form-control&quot; />
+                    </div>
+                    <div class=&quot;form-group&quot;>
+                        <label for=&quot;trick_images___name___file&quot; class=&quot;required&quot;>Fichier</label>
+                        <div class=&quot;custom-file&quot;>
+                            <input type=&quot;file&quot; id=&quot;trick_images___name___file&quot; name=&quot;trick[images][__name__][file]&quot; required=&quot;required&quot; class=&quot;custom-file-input&quot; />
+                            <label for=&quot;trick_images___name___file&quot;  class=&quot;custom-file-label&quot;></label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>">
+    </div>
+    {% do form.images.setRendered %}
     <input type="submit" value="Valider">
 {{ form_end(form) }}

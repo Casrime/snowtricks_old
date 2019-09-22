@@ -10,12 +10,7 @@
 
     <div class="example-wrapper">
         <h1>Éditer une figure</h1>
-        {#
-        {% for image in trick.images %}
-            <img src="{{ asset('uploads/'~image.name) }}" alt="{{ image.alt }}" />
-        {% endfor %}
-        #}
-        {{ include('back/trick/_form.html.twig') }}
+        {{ include('back/trick/_form.html.twig', {edit: true}) }}
     </div>
 {% endblock %}
 

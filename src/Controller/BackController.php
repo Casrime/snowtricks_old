@@ -60,9 +60,10 @@ class BackController extends AbstractController
             $entityManager->persist($trick);
             $entityManager->flush();
         }
+        dump($form);
         return $this->render('back/trick/edit.html.twig', [
             'form' => $form->createView(),
-            //'trick' => $trick
+            'trick' => $trick
         ]);
     }
 }
