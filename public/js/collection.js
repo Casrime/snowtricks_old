@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
 
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
-    $collectionHolder.data('index', $collectionHolder.find(':input').length);
+    $collectionHolder.data('index', $collectionHolder.find(':text').length);
 
     $addImageLink.on('click', function(e) {
         // prevent the link from creating a "#" on the URL
@@ -30,10 +30,14 @@ function addImageForm($collectionHolder, $newLinkLi) {
 
     // get the new index
     var index = $collectionHolder.data('index');
+    if(index === 0) {
+        index = 1;
+    }
 
     // Replace '$$name$$' in the prototype's HTML to
     // instead be a number based on how many items we have
-    var newForm = prototype.replace(/__name__/g, index);
+    var label = prototype.replace(/label__/g,'');
+    var newForm = label.replace(/__name__/g, 'Image ' + index);
 
     // increase the index with one for the next item
     $collectionHolder.data('index', index + 1);
