@@ -25,12 +25,39 @@ class BackController extends AbstractController
                 $filename = $fileUploader->upload($image->getFile());
                 $image->setName($filename);
                 $image->setTrick($trick);
+                $trick->addImage($image);
+                $entityManager->persist($image);
             }
             $entityManager->persist($trick);
             $entityManager->flush();
         }
         return $this->render('back/trick/new.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/tricks/edit/{id}", name="edit_trick")
+     */
+    public function editTrick(Trick $trick, Request $request, FileUploader $fileUploader, EntityManagerInterface $entityManager)
+    {
+        $form = $this->createForm(TrickType::class, $trick);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            foreach ($trick->getImages() as $image) {
+                if(!$image->getId()) {
+                    $filename = $fileUploader->upload($image->getFile());
+                    $image->setName($filename);
+                    $image->setTrick($trick);
+                    $entityManager->persist($image);
+                }
+            }
+            $entityManager->persist($trick);
+            $entityManager->flush();
+        }
+        return $this->render('back/trick/edit.html.twig', [
+            'form' => $form->createView(),
+            'trick' => $trick
         ]);
     }
 }

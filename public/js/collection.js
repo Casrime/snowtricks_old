@@ -4,7 +4,7 @@ var $newLinkLi = $('<li></li>').append($addImageLink);
 
 jQuery(document).ready(function() {
     // Get the ul that holds the collection of images
-    var $collectionHolder = $('ul.images');
+    var $collectionHolder = $('#trick_images');
 
     // add the "add a image" anchor and li to the images ul
     $collectionHolder.append($newLinkLi);
@@ -30,7 +30,6 @@ function addImageForm($collectionHolder, $newLinkLi) {
 
     // get the new index
     var index = $collectionHolder.data('index');
-
     // Replace '$$name$$' in the prototype's HTML to
     // instead be a number based on how many items we have
     var newForm = prototype.replace(/__name__/g, index);
