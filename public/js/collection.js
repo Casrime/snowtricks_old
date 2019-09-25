@@ -11,6 +11,7 @@ jQuery(document).ready(function() {
 
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
+    //console.log($collectionHolder.data('index'));
     $collectionHolder.data('index', $collectionHolder.find(':text').length);
 
     $addImageLink.on('click', function(e) {
@@ -29,11 +30,8 @@ function addImageForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
 
     // get the new index
-    var index = $collectionHolder.data('index');
-    if(index === 0) {
-        index = 1;
-    }
-
+    var index = $("#trick_images").data('value');
+    console.log(index);
     // Replace '$$name$$' in the prototype's HTML to
     // instead be a number based on how many items we have
     var newForm = prototype.replace(/__name__/g, index);

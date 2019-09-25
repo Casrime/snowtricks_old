@@ -26,6 +26,7 @@ class BackController extends AbstractController
                 $filename = $fileUploader->upload($image->getFile());
                 $image->setName($filename);
                 $image->setTrick($trick);
+                $entityManager->persist($image);
             }
             dump($trick);
             //dd($form->getData());
@@ -46,16 +47,20 @@ class BackController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             //dd($form->getData());
-
+            dump($trick);
             foreach ($trick->getImages() as $image) {
                 if(!$image->getId()) {
                     $filename = $fileUploader->upload($image->getFile());
                     $image->setName($filename);
+                    $image->setAlt($image->getAlt());
                     $image->setTrick($trick);
+                    $trick->addImage($image);
+                    $entityManager->persist($image);
                     dump($image);
                 }
             }
             dump($trick);
+
             //dd($form->getData());
             $entityManager->persist($trick);
             $entityManager->flush();
