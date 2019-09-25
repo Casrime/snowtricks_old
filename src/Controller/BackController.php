@@ -27,8 +27,6 @@ class BackController extends AbstractController
                 $image->setName($filename);
                 $image->setTrick($trick);
             }
-            dump($trick);
-            //dd($form->getData());
             $entityManager->persist($trick);
             $entityManager->flush();
         }
@@ -45,22 +43,16 @@ class BackController extends AbstractController
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            //dd($form->getData());
-
             foreach ($trick->getImages() as $image) {
                 if(!$image->getId()) {
                     $filename = $fileUploader->upload($image->getFile());
                     $image->setName($filename);
                     $image->setTrick($trick);
-                    dump($image);
                 }
             }
-            dump($trick);
-            //dd($form->getData());
             $entityManager->persist($trick);
             $entityManager->flush();
         }
-        dump($form);
         return $this->render('back/trick/edit.html.twig', [
             'form' => $form->createView(),
             'trick' => $trick
