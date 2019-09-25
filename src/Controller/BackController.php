@@ -64,6 +64,9 @@ class BackController extends AbstractController
             //dd($form->getData());
             $entityManager->persist($trick);
             $entityManager->flush();
+            return $this->redirectToRoute('edit_trick', [
+                'id' => $trick->getId()
+            ]);
         }
         dump($form);
         return $this->render('back/trick/edit.html.twig', [

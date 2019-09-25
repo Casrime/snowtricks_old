@@ -30,8 +30,7 @@ function addImageForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
 
     // get the new index
-    var index = $("#trick_images").data('value');
-    console.log(index);
+    var index = $collectionHolder.data('value');
     // Replace '$$name$$' in the prototype's HTML to
     // instead be a number based on how many items we have
     var newForm = prototype.replace(/__name__/g, index);
