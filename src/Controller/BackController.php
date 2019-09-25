@@ -4,15 +4,24 @@ namespace App\Controller;
 
 use App\Entity\Trick;
 use App\Form\TrickType;
-use App\Service\FileUploader;
+use App\Repository\TrickRepository;
 use App\Service\TrickHandler;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BackController extends AbstractController
 {
+    /**
+     * @Route("/", name="admin")
+     */
+    public function adminHome(TrickRepository $trickRepository)
+    {
+        return $this->render('back/trick/admin.html.twig', [
+           'tricks' => $trickRepository->findAll()
+        ]);
+    }
+
     /**
      * @Route("/tricks/new", name="add_trick")
      */
@@ -23,6 +32,8 @@ class BackController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $trickHandler->handle($trick);
+            $this->addFlash('trick_add', 'La nouvelle figure a bien été ajoutée');
+            return $this->redirectToRoute('admin');
         }
         return $this->render('back/trick/new.html.twig', [
             'form' => $form->createView(),
@@ -38,6 +49,8 @@ class BackController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $trickHandler->handle($trick);
+            $this->addFlash('trick_edit', 'La figure a bien été mise à jour');
+            return $this->redirectToRoute('admin');
         }
         return $this->render('back/trick/edit.html.twig', [
             'form' => $form->createView(),

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    {{ include('flash.html.twig') }}
+    <div id="admin">
+        <h1>Administration</h1>
+        {% for trick in tricks %}
+            <div class="trick">
+                <h2>{{ trick.name }}</h2>
+                <p>{{ trick.category.name }}</p>
+                <p>{{ trick.description }}</p>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/collection.js') }}"></script>
+{% endblock %}
