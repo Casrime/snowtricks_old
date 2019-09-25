@@ -3,17 +3,19 @@
 {% block title %}Administration{% endblock %}
 
 {% block body %}
-    {{ include('flash.html.twig') }}
-    <div id="admin">
-        <h1>Administration</h1>
-        {% for trick in tricks %}
-            <div class="trick">
-                <h2>{{ trick.name }}</h2>
-                <p>{{ trick.category.name }}</p>
-                <p>{{ trick.description }}</p>
-            </div>
-        {% endfor %}
+    <div class="col-12">
+        {{ include('flash.html.twig') }}
+        <div id="admin">
+            <h1>Administration</h1>
+            {% for trick in tricks %}
+                <div class="trick">
+                    <h2>{{ trick.name }}</h2>
+                    <p class="badge badge-secondary">{{ trick.category.name }}</p>
+                    <p>{{ trick.description }}</p>
+                </div>
+            {% endfor %}
 
+        </div>
     </div>
 {% endblock %}
 
