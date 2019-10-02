@@ -18,7 +18,9 @@ class BackController extends AbstractController
     public function adminHome(TrickRepository $trickRepository)
     {
         return $this->render('back/trick/admin.html.twig', [
-           'tricks' => $trickRepository->findAll()
+           'tricks' => $trickRepository->findBy([], [
+               'id' => 'DESC'
+           ])
         ]);
     }
 
