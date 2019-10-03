@@ -37,6 +37,11 @@ class Image
      */
     private $trick;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isMainImage;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,5 +97,17 @@ class Image
     public function setFile($file): void
     {
         $this->file = $file;
+    }
+
+    public function getIsMainImage(): ?bool
+    {
+        return $this->isMainImage;
+    }
+
+    public function setIsMainImage(bool $isMainImage): self
+    {
+        $this->isMainImage = $isMainImage;
+
+        return $this;
     }
 }
