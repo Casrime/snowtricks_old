@@ -120,6 +120,9 @@
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
+    "php": {
+        "version": "7.3"
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
@@ -133,6 +136,9 @@
         "version": "1.0.1"
     },
     "psr/container": {
+        "version": "1.0.0"
+    },
+    "psr/event-dispatcher": {
         "version": "1.0.0"
     },
     "psr/link": {
@@ -185,9 +191,6 @@
         ]
     },
     "symfony/css-selector": {
-        "version": "v4.3.4"
-    },
-    "symfony/debug": {
         "version": "v4.3.4"
     },
     "symfony/debug-bundle": {
@@ -466,6 +469,9 @@
             "templates/base.html.twig"
         ]
     },
+    "symfony/twig-pack": {
+        "version": "v1.0.0"
+    },
     "symfony/validator": {
         "version": "4.3",
         "recipe": {
@@ -502,17 +508,11 @@
             "config/routes/dev/web_profiler.yaml"
         ]
     },
-    "symfony/web-server-bundle": {
-        "version": "3.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "3.3",
-            "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
-        }
-    },
     "symfony/yaml": {
         "version": "v4.3.4"
+    },
+    "twig/extra-bundle": {
+        "version": "v3.0.1"
     },
     "twig/twig": {
         "version": "v2.11.3"
