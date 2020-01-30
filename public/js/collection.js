@@ -29,10 +29,7 @@ function addImageForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
 
     // get the new index
-    var index = $collectionHolder.data('index');
-    if(index === 0) {
-        index = 1;
-    }
+    var index = $collectionHolder.data('value');
 
     // Replace '$$name$$' in the prototype's HTML to
     // instead be a number based on how many items we have

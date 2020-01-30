@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Trick;
-use App\Form\Model\TrickFormModel;
 use App\Form\TrickType;
-use App\Service\FileUploader;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\TrickRepository;
+use App\Service\TrickHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,23 +13,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class BackController extends AbstractController
 {
     /**
+     * @Route("/", name="admin")
+     */
+    public function adminHome(TrickRepository $trickRepository)
+    {
+        return $this->render('back/trick/admin.html.twig', [
+           'tricks' => $trickRepository->findAll()
+        ]);
+    }
+
+    /**
      * @Route("/tricks/new", name="add_trick")
      */
-    public function addTrick(Request $request, FileUploader $fileUploader, EntityManagerInterface $entityManager)
+    public function addTrick(Request $request, TrickHandler $trickHandler)
     {
         $trick = new Trick();
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            foreach ($trick->getImages() as $image) {
-                $filename = $fileUploader->upload($image->getFile());
-                $image->setName($filename);
-                $image->setTrick($trick);
-            }
-            dump($trick);
-            //dd($form->getData());
-            $entityManager->persist($trick);
-            $entityManager->flush();
+            $trickHandler->handle($trick);
+            $this->addFlash('trick_add', 'La nouvelle figure a bien été ajoutée');
+            return $this->redirectToRoute('admin');
         }
         return $this->render('back/trick/new.html.twig', [
             'form' => $form->createView(),
@@ -40,27 +43,15 @@ class BackController extends AbstractController
     /**
      * @Route("/tricks/edit/{id}", name="edit_trick")
      */
-    public function editTrick(Trick $trick, Request $request, FileUploader $fileUploader, EntityManagerInterface $entityManager)
+    public function editTrick(Trick $trick, Request $request, TrickHandler $trickHandler)
     {
         $form = $this->createForm(TrickType::class, $trick);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            //dd($form->getData());
-
-            foreach ($trick->getImages() as $image) {
-                if(!$image->getId()) {
-                    $filename = $fileUploader->upload($image->getFile());
-                    $image->setName($filename);
-                    $image->setTrick($trick);
-                    dump($image);
-                }
-            }
-            dump($trick);
-            //dd($form->getData());
-            $entityManager->persist($trick);
-            $entityManager->flush();
+            $trickHandler->handle($trick);
+            $this->addFlash('trick_edit', 'La figure a bien été mise à jour');
+            return $this->redirectToRoute('admin');
         }
-        dump($form);
         return $this->render('back/trick/edit.html.twig', [
             'form' => $form->createView(),
             'trick' => $trick

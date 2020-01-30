@@ -1,0 +1,11 @@
+{% for message in app.flashes('trick_add') %}
+    <div class="flash-notice">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('trick_edit') %}
+    <div class="flash-notice">
+        {{ message }}
+    </div>
+{% endfor %}
