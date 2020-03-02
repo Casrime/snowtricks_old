@@ -9,7 +9,8 @@
     {% endif %}
     <div
         id="trick_images"
-        data-value="{{ form.images.children|length }}"
+        data-index="{{ form.images.children|length }}"
+        data-value="{% if trick is defined %}{{ trick.images|length }}{% endif %}"
         data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}"
     >
     </div>

@@ -29,14 +29,22 @@ function addImageForm($collectionHolder, $newLinkLi) {
     var prototype = $collectionHolder.data('prototype');
 
     // get the new index
-    var index = $collectionHolder.data('value');
-
+    var index = $collectionHolder.data('index');
+    console.log(index);
+    var value = $collectionHolder.data('value');
+    console.log(value);
+    if(value) {
+        var newForm = prototype.replace(/__name__/g, value);
+        // increase the index with one for the next item
+        $collectionHolder.data('value', value + 1);
+    } else {
+        var newForm = prototype.replace(/__name__/g, index);
+        $collectionHolder.data('index', index + 1);
+    }
     // Replace '$$name$$' in the prototype's HTML to
     // instead be a number based on how many items we have
-    var newForm = prototype.replace(/__name__/g, index);
 
-    // increase the index with one for the next item
-    $collectionHolder.data('index', index + 1);
+
 
     // Display the form in the page in an li, before the "Add a image" link li
     var $newFormLi = $('<li></li>').append(newForm);
