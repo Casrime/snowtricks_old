@@ -30,9 +30,7 @@ function addImageForm($collectionHolder, $newLinkLi) {
 
     // get the new index
     var index = $collectionHolder.data('index');
-    console.log(index);
     var value = $collectionHolder.data('value');
-    console.log(value);
     if(value) {
         var newForm = prototype.replace(/__name__/g, value);
         // increase the index with one for the next item

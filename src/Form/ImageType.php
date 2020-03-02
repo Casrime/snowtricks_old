@@ -22,7 +22,8 @@ class ImageType extends AbstractType
                 'label' => 'Fichier'
             ])
             ->add('isMainImage', RadioType::class, [
-                'label' => 'Image principale'
+                'label' => 'Image principale',
+                'required' => false
             ])
         ;
     }
