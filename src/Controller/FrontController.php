@@ -11,9 +11,8 @@ class FrontController extends AbstractController
     /**
      * @Route("/", name="front")
      */
-    public function index(CategoryRepository $categoryRepository)
+    public function front(CategoryRepository $categoryRepository)
     {
-
         return $this->render('front/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
         ]);
