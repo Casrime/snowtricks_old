@@ -19,9 +19,9 @@ jQuery(document).ready(function() {
 
         // add a new image form (see code block below)
         addImageForm($collectionHolder, $newLinkLi);
+
+        showImageName();
     });
-
-
 });
 
 function addImageForm($collectionHolder, $newLinkLi) {
@@ -59,5 +59,15 @@ function addImageForm($collectionHolder, $newLinkLi) {
         $(this).parent().remove();
 
         return false;
+    });
+}
+
+function showImageName()
+{
+    $('.custom-file-input').on('change', function(event) {
+        var inputFile = event.currentTarget;
+        $(inputFile).parent()
+            .find('.custom-file-label')
+            .html(inputFile.files[0].name);
     });
 }
